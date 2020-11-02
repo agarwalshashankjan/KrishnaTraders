@@ -1,83 +1,144 @@
 import React from 'react';
-import {Text, TextInput, View, Picker} from 'react-native';
+import {Text, TextInput, View, Picker, StyleSheet} from 'react-native';
 import Table from './common/Table';
 
 const Form = () => {
-  const row1 = [
-    <Text>~~~</Text>,
-    <Text>Unit</Text>,
-    <Text>Rate</Text>,
-    <Text>Amount</Text>,
-  ];
-
-  const row2 = [
-    <Text>Masala</Text>,
-    <TextInput placeholder="Number" />,
-    <TextInput placeholder="Price" />,
-    <Text>---</Text>,
-  ];
-
-  const row3 = [
-    <Text>Tobacoo</Text>,
-    <TextInput placeholder="Number" />,
-    <TextInput placeholder="Price" />,
-    <Text>---</Text>,
-  ];
-
-  const row4 = [
-    <Text>Select GST Rate</Text>,
-    <Text>Accessible Value</Text>,
-    <Text>CGST | SGST</Text>,
-    <Text>Total Tax</Text>,
-  ];
-
-  const row5 = [
-    <Picker
-          style={{flex: 2.5}}
-          mode="dropdown">
-          <Picker.Item label="0%" value="0" />
-          <Picker.Item label="5%" value="5" />
-          <Picker.Item label="12%" value="12" />
-          <Picker.Item label="28%" value="28" />
-        </Picker>,
-    <Text>---</Text>,
-    <Text>---</Text>,
-    <Text>---</Text>,
-  ];
-
-  const row6 = [
-    <Text>Total Amount In Words: ---</Text>,
-    <Text>---</Text>,
-    <Text>cess @60%</Text>,
-    <Text>---</Text>,
-  ];
-  
-  const row7 = [
-    <Text>---</Text>,
-    <Text>---</Text>,
-    <Text>cess @160%</Text>,
-    <Text>---</Text>,
-  ];
-
-  const row8 = [
-    <Text>---</Text>,
-    <Text>---</Text>,
-    <Text>Round OFF</Text>,
-    <Text>---</Text>,
-  ];
-
-  const row9 = [
-    <Text>---</Text>,
-    <Text>---</Text>,
-    <Text>Gross Total</Text>,
-    <Text>---</Text>,
-  ];
-
   return (
-    <View>
-      <Table data={[row1, row2, row3, row4, row5, row6, row7, row8, row9]} />
+    <View style={styles.view}>
+      <Text>Date:</Text>
+      <TextInput placeholder="DD/MM/YYYY" />
+      <View style={styles.row}>
+        <View style={styles.cells}>
+          <Text>~~~</Text>
+        </View>
+        <View style={styles.cells}>
+          <Text>Unit</Text>
+        </View>
+        <View style={styles.cells}>
+          <Text>Rate</Text>
+        </View>
+        <View style={styles.cells}>
+          <Text>Amount</Text>
+        </View>
+      </View>
+      <View style={styles.row}>
+        <View style={styles.cells}>
+          <Text>Masala</Text>
+        </View>
+        <View style={styles.cells}>
+          <TextInput placeholder="Number" />
+        </View>
+        <View style={styles.cells}>
+          <TextInput placeholder="Price" />
+        </View>
+        <View style={styles.cells}>
+          <Text>---</Text>
+        </View>
+      </View>
+      <View style={styles.row}>
+        <View style={styles.cells}>
+          <Text>Tobacoo</Text>
+        </View>
+        <View style={styles.cells}>
+          <TextInput placeholder="Number" />
+        </View>
+        <View style={styles.cells}>
+          <TextInput placeholder="Price" />
+        </View>
+        <View style={styles.cells}>
+          <Text>---</Text>
+        </View>
+      </View>
+      <View style={{margin: 5}}></View>
+      <View style={styles.row}>
+        <View style={styles.cells}>
+          <Text>Select GST Rate</Text>
+        </View>
+        <View style={styles.cells}>
+          <Text>Accessible Value</Text>
+        </View>
+        <View style={styles.cells}>
+          <Text>CGST | SGST</Text>
+        </View>
+        <View style={styles.cells}>
+          <Text>Total Tax</Text>
+        </View>
+      </View>
+      <View style={styles.row}>
+        <View style={styles.cells}>
+          <Picker style={{flex: 2.5}} mode="dropdown">
+            <Picker.Item label="0%" value="0" />
+            <Picker.Item label="5%" value="5" />
+            <Picker.Item label="12%" value="12" />
+            <Picker.Item label="28%" value="28" />
+          </Picker>
+        </View>
+        <View style={styles.cells}>
+          <Text>---</Text>
+        </View>
+        <View style={styles.cells}>
+            <Text>---</Text>
+          </View>
+        <View style={styles.cells}>
+          <Text>---</Text>
+        </View>
+      </View>
+      <View style={{margin: 5}}></View>
+      <View style={styles.row}>
+        <View style={styles.cells}>
+          <Text>Total Amount In Words: ---</Text>
+        </View>
+        <View style={styles.cells}>
+          <Text>cess @60%</Text>
+        </View>
+        <View style={styles.cells}>
+          <Text>---</Text>
+        </View>
+      </View>
+      <View style={styles.row}>
+        <View style={styles.cells}>
+          <Text>cess @160%</Text>
+        </View>
+        <View style={styles.cells}>
+          <Text>---</Text>
+        </View>
+      </View>
+      <View style={styles.row}>
+        <View style={styles.cells}>
+          <Text>Round OFF</Text>
+        </View>
+        <View style={styles.cells}>
+          <Text>---</Text>
+        </View>
+      </View>
+      <View style={styles.row}>
+        <View style={styles.cells}>
+          <Text>Gross Total</Text>
+        </View>
+        <View style={styles.cells}>
+          <Text>---</Text>
+        </View>
+      </View>
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  view: {
+    alignItems: 'center',
+    padding: 5,
+    justifyContent: 'center',
+  },
+  row: {
+    alignSelf: 'stretch',
+    flexDirection: 'row',
+  },
+  cells: {
+    flex: 1,
+    padding: 5,
+    alignSelf: 'stretch',
+    borderWidth: 1,
+  },
+});
 
 export default Form;
