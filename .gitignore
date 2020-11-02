@@ -5,6 +5,8 @@
 # Xcode
 #
 build/
+
+build/!outputs
 *.pbxuser
 !default.pbxuser
 *.mode1v3
@@ -24,8 +26,10 @@ DerivedData
 # Android/IntelliJ
 #
 build/
+build/!outputs
 .idea
 .gradle
+!build.gradle
 local.properties
 *.iml
 
