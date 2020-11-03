@@ -132,8 +132,9 @@ android {
         applicationId "com.krishnatraders"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        // change versionCode by 1 whenever new Release and versionName as symantic versioning system allows 
         versionCode 1
-        versionName "1.0"
+        versionName "0.1.0"
     }
     splits {
         abi {
