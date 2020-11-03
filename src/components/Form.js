@@ -1,12 +1,38 @@
 import React from 'react';
 import {Text, TextInput, View, Picker, StyleSheet} from 'react-native';
-import Table from './common/Table';
+import * as actions from '../actions';
+import {connect} from 'react-redux';
 
-const Form = () => {
+const Form = (props) => {
+  const {
+    date,
+    unitMasala,
+    unitTobacoo,
+    rateMasala,
+    rateTobacoo,
+    amtMasala,
+    amtTobacoo,
+    GSTRate,
+    accessibleValue,
+    GST,
+    totalTax,
+    cess60,
+    cess160,
+    roundOff,
+    Gross,
+    dataUpdate,
+  } = props;
+
+  const gst = GST;
+
   return (
     <View style={styles.view}>
       <Text>Date:</Text>
-      <TextInput placeholder="DD/MM/YYYY" />
+      <TextInput
+        placeholder="DD/MM/YYYY"
+        value={date}
+        onChangeText={(text) => dataUpdate('date', text)}
+      />
       <View style={styles.row}>
         <View style={styles.cells}>
           <Text>~~~</Text>
@@ -26,13 +52,21 @@ const Form = () => {
           <Text>Masala</Text>
         </View>
         <View style={styles.cells}>
-          <TextInput placeholder="Number" />
+          <TextInput
+            placeholder="Number"
+            value={unitMasala}
+            onChangeText={(text) => dataUpdate('unitMasala', text)}
+          />
         </View>
         <View style={styles.cells}>
-          <TextInput placeholder="Price" />
+          <TextInput
+            placeholder="Price"
+            value={rateMasala}
+            onChangeText={(text) => dataUpdate('rateMasala', text)}
+          />
         </View>
         <View style={styles.cells}>
-          <Text>---</Text>
+          {amtMasala ? <Text>{amtMasala}</Text> : <Text>---</Text>}
         </View>
       </View>
       <View style={styles.row}>
@@ -40,13 +74,21 @@ const Form = () => {
           <Text>Tobacoo</Text>
         </View>
         <View style={styles.cells}>
-          <TextInput placeholder="Number" />
+          <TextInput
+            placeholder="Number"
+            value={unitTobacoo}
+            onChangeText={(text) => dataUpdate('unitTobacoo', text)}
+          />
         </View>
         <View style={styles.cells}>
-          <TextInput placeholder="Price" />
+          <TextInput
+            placeholder="Price"
+            value={rateTobacoo}
+            onChangeText={(text) => dataUpdate('rateTobacoo', text)}
+          />
         </View>
         <View style={styles.cells}>
-          <Text>---</Text>
+          {amtTobacoo ? <Text>{amtTobacoo}</Text> : <Text>---</Text>}
         </View>
       </View>
       <View style={{margin: 5}}></View>
@@ -66,7 +108,11 @@ const Form = () => {
       </View>
       <View style={styles.row}>
         <View style={styles.cells}>
-          <Picker style={{flex: 2.5}} mode="dropdown">
+          <Picker
+            style={{flex: 2.5}}
+            mode="dropdown"
+            selectedValue={GSTRate}
+            onValueChange={(rate) => dataUpdate('GSTRate', rate)}>
             <Picker.Item label="0%" value="0" />
             <Picker.Item label="5%" value="5" />
             <Picker.Item label="12%" value="12" />
@@ -74,13 +120,19 @@ const Form = () => {
           </Picker>
         </View>
         <View style={styles.cells}>
-          <Text>---</Text>
+          {accessibleValue ? <Text>{accessibleValue}</Text> : <Text>---</Text>}
         </View>
         <View style={styles.cells}>
+          {GST ? (
+            <Text>
+              {gst / 2} | {gst / 2}
+            </Text>
+          ) : (
             <Text>---</Text>
-          </View>
+          )}
+        </View>
         <View style={styles.cells}>
-          <Text>---</Text>
+          {totalTax ? <Text>{totalTax}</Text> : <Text>---</Text>}
         </View>
       </View>
       <View style={{margin: 5}}></View>
@@ -92,7 +144,7 @@ const Form = () => {
           <Text>cess @60%</Text>
         </View>
         <View style={styles.cells}>
-          <Text>---</Text>
+          {cess60 ? <Text>{cess60}</Text> : <Text>---</Text>}
         </View>
       </View>
       <View style={styles.row}>
@@ -100,7 +152,7 @@ const Form = () => {
           <Text>cess @160%</Text>
         </View>
         <View style={styles.cells}>
-          <Text>---</Text>
+          {cess160 ? <Text>{cess160}</Text> : <Text>---</Text>}
         </View>
       </View>
       <View style={styles.row}>
@@ -108,7 +160,7 @@ const Form = () => {
           <Text>Round OFF</Text>
         </View>
         <View style={styles.cells}>
-          <Text>---</Text>
+          {roundOff ? <Text>{roundOff}</Text> : <Text>---</Text>}
         </View>
       </View>
       <View style={styles.row}>
@@ -116,7 +168,7 @@ const Form = () => {
           <Text>Gross Total</Text>
         </View>
         <View style={styles.cells}>
-          <Text>---</Text>
+          {Gross ? <Text>{Gross}</Text> : <Text>---</Text>}
         </View>
       </View>
     </View>
@@ -141,4 +193,41 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Form;
+const mapStateToProps = (state) => {
+  const {
+    date,
+    unitMasala,
+    unitTobacoo,
+    rateMasala,
+    rateTobacoo,
+    amtMasala,
+    amtTobacoo,
+    GSTRate,
+    accessibleValue,
+    GST,
+    totalTax,
+    cess60,
+    cess160,
+    roundOff,
+    Gross,
+  } = state.formBilling;
+  return {
+    date,
+    unitMasala,
+    unitTobacoo,
+    rateMasala,
+    rateTobacoo,
+    amtMasala,
+    amtTobacoo,
+    GSTRate,
+    accessibleValue,
+    GST,
+    totalTax,
+    cess60,
+    cess160,
+    roundOff,
+    Gross,
+  };
+};
+
+export default connect(mapStateToProps, actions)(Form);
